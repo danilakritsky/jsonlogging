@@ -13,9 +13,12 @@ class FormatMixin:
         for field in self._get_fields():
             selected_fields[field] = record.__dict__[field]
 
-        if defaults := self._defaults:
-            values = defaults | selected_fields
-        else:
+        try:
+            if defaults := self._defaults:
+                values = defaults | selected_fields
+            else:
+                values = selected_fields
+        except AttributeError:
             values = selected_fields
         return json.dumps(values)
 
@@ -119,11 +122,20 @@ class JSONFormatter(logging.Formatter):
         self, fmt=None, datefmt=None, style="%", validate=False, *, defaults=None
     ):
         # https://stackoverflow.com/questions/61261992/why-super-init-doesnt-have-a-self-reference
-        super().__init__(
-            fmt=fmt, datefmt=datefmt, style=style, validate=validate, defaults=defaults
-        )
+        # exception handler to support earlier versions of logging, which had no defaults parameter
+        try:
+            super().__init__(
+                fmt=fmt, datefmt=datefmt, style=style, validate=validate, defaults=defaults
+            )
+        except TypeError:
+            super().__init__(
+                fmt=fmt, datefmt=datefmt, style=style, validate=validate,
+            )
 
-        self._style = _STYLES[style][0](fmt, defaults=defaults)
+        try:
+            self._style = _STYLES[style][0](fmt, defaults=defaults)
+        except TypeError:
+            self._style = _STYLES[style][0](fmt)
         if validate:
             self._style.validate()
 
@@ -144,4 +156,4 @@ class JSONFormatter(logging.Formatter):
             s["exc_text"] = record.exc_text
         if record.stack_info:
             s["stack_info"] = self.formatStack(record.stack_info)
-        return s
+        return json.dumps(s)
