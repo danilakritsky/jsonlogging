@@ -117,7 +117,7 @@ _STYLES = {
 }
 
 
-class JSONFormatter(logging.Formatter):
+class JSONLogFormatter(logging.Formatter):
     def __init__(
         self, fmt=None, datefmt=None, style="%", validate=False, *, defaults=None
     ):
