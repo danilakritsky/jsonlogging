@@ -7,8 +7,6 @@ import typing
 from pathlib import Path
 from typing import Any, Callable, Iterable
 
-
-
 # https://betterprogramming.pub/4-new-type-annotation-features-in-python-3-11-84e7ec277c29
 
 # https://docs.python.org/3/library/logging.html#logrecord-attributes
@@ -102,7 +100,7 @@ class JSONFormatter:
         self,
         fields: Iterable[str] | str | None = None,
         datefmt: str = "%Y-%m-%d %H:%M:%S",
-        indent: int = 2,
+        indent: int | None = 2,
     ):
 
         if fields is None:
@@ -116,7 +114,7 @@ class JSONFormatter:
                 raise TypeError(
                     "A fields argument must be either None, an iterable or a str."
                 )
-        self.indent: int = indent
+        self.indent: int | None = indent
         self.datefmt: str = datefmt
 
     def format(self, record: logging.LogRecord) -> str:

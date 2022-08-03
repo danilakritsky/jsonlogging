@@ -1,7 +1,7 @@
 import logging.config
-from .jsonformatter import JSONFormatter
 
 from .config import BASIC_CONFIG
+from .jsonformatter import LOGRECORD_ATTRS, JSONFormatter
 
 
 def basicConfig():

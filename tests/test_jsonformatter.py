@@ -6,12 +6,7 @@ from io import StringIO
 
 from jsonlogging import LOGRECORD_ATTRS, JSONFormatter
 
-# https://docs.python-guide.org/writing/structure/
-# sys.path.append(
-#     './jsonlogformatter/'
-# )
-
-# pytest not able to capture logs
+# pytest failes to capture logs
 # https://github.com/pytest-dev/pytest/issues/5997
 
 

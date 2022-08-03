@@ -1,8 +1,9 @@
 import logging
 import logging.handlers
+import sys
 from pathlib import Path
 
-from .. import JSONFormatter
+from .jsonformatter import JSONFormatter
 
 BASIC_CONFIG = {
     "version": 1,
@@ -21,8 +22,12 @@ BASIC_CONFIG = {
             "()": logging.FileHandler,
             "level": "INFO",
             "formatter": "file",
-            "filename": "project.log",
+            "filename": "jsonlogging.log",
         },
     },
     "root": {"level": "INFO", "handlers": ["console", "file"]},
 }
+
+
+def dictConfigFromFile(path: str):
+    """Use a dict stored in a file as logging configuration."""
