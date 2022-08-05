@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "jsonlogging"
 version = "0.1.0"
-description = "JSON formatter for the python's `logging` module"
+description = "Provides a JSONFormatter object that can be used by Python's logging module's Handler objects to log messages in JSON format."
 authors = ["Danila Kritsky <danilakritsky@gmail.com>"]
 
 [tool.poetry.dependencies]
