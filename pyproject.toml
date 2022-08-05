@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "jsonlogging"
+version = "0.1.0"
+description = "JSON formatter for the python's `logging` module"
+authors = ["Danila Kritsky <danilakritsky@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+isort = "^5.10.1"
+mypy = "^0.971"
+black = "^22.6.0"
+pytest = "^7.1.2"
+ipython = "^8.4.0"
+coverage = "^6.4.2"
+flake8 = "^5.0.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+preview = true
+line-length = 79
